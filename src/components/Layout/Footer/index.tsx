@@ -19,11 +19,23 @@ type FooterProps = {
 
 const useStyles = Styles
 
+const docs = [
+  {
+    id: 0,
+    download: '/files/terms.pdf',
+    title: 'firstDocument'
+  },
+  {
+    id: 1,
+    download: '/files/crypto.pdf',
+    title: 'secondDocument'
+  }
+]
+
 const Footer: React.FC<FooterProps> = ({ scrollTop }) => {
   const { t } = useTranslation()
   const { smDown } = useSizes()
   const classes = useStyles()
-
   return (
     <>
       <Box className={classes.root}>
@@ -42,38 +54,21 @@ const Footer: React.FC<FooterProps> = ({ scrollTop }) => {
           </Grid>
           <Grid item md={5} xs={12}>
             <Grid container>
-              <Grid item md={12} xs={12}>
-                <Box className={classes.floatBox}>
-                  <Typography variant='h3'>
-                    {t('subscribeNewsletter')}
-                  </Typography>
-                  <form>
-                    <Box pt={smDown ? 2 : 5} display='flex'>
-                      <Box width={smDown ? '60%' : '70%'}>
-                        <input
-                          className={classes.formStyle}
-                          type='text'
-                          id='email'
-                          name='email'
-                          placeholder='Email'
-                        />
-                      </Box>
-                      <Box width={smDown ? '40%' : '30%'}>
-                        <BaseButton
-                          className={classes.button}
-                          color='secondary'
-                          fullWidth={smDown}
-                          variant='contained'
-                        >
-                          {t('subscribe')}
-                        </BaseButton>
-                      </Box>
-                    </Box>
-                  </form>
-                  <Box pt={1}>
-                    <Typography variant='caption'>{t('newsletter')}</Typography>
-                  </Box>
-                </Box>
+              <Grid item md={12} xs={12} className={classes.docs}>
+                <div>
+                  <Typography variant='h4'>{t('footerDocsTitle')}</Typography>
+                </div>
+                <div className={classes.links}>
+                  {docs.map(doc => (
+                    <div key={doc.id}>
+                      <Link href={doc.download} download={t(doc.title)}>
+                        <Typography variant='subtitle2'>
+                          {t(doc.title)}
+                        </Typography>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
               </Grid>
             </Grid>
           </Grid>
@@ -82,7 +77,7 @@ const Footer: React.FC<FooterProps> = ({ scrollTop }) => {
               <Link href='https://edenia.com/es'>
                 <img
                   width='20%'
-                  src='https://raw.githubusercontent.com/edenia/edenia.com/main/public/logos/logo-edenia-punto-verde.png?token=GHSAT0AAAAAABOUWD54MEB4SC5CQWRCEMX6YSLMVLQ'
+                  src='https://edenia.com/es/logos/logo-edenia-punto-verde.png'
                 />
               </Link>
               <Typography variant='caption'>
